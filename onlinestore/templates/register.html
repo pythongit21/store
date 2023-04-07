@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div style="text-align:center; margin-top:40px; margin-bottom: 100px;">
+  
+    <!-- Register Form -->
+    <form name="RegisterForm" method="POST">
+      {% csrf_token %}
+      <table style="text-align:left;border:none;width:80%;margin:0 auto;">
+
+        <tr style="height:60px;">
+          		<td colspan="2">&nbsp;&nbsp;
+                  {% for m in messages %}
+            		<h3 style="color: #008000">{{ m }}</h3>
+                  {% endfor %}
+          		</td>
+        </tr>
+
+        <tr style="height:60px;">
+          <td style="width:25%;">Username</td>
+          <td><input type="text" id="username" name="username" placeholder="Username" required></td>
+        </tr>
+        
+        <tr style="height:60px;">
+          <td>Password</td>
+          <td><input type="password" id="password" name="password" placeholder="Password" required></td>
+        </tr>
+
+        <tr style="height:60px;">
+          <td>Confirm Password</td>
+          <td><input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required></td>
+        </tr>
+
+        <tr style="height:60px;">
+          <td colspan="2">
+            <input type="submit" style="color: #fff;background-color: #5cb85c;border-color: #4cae4c;cursor: pointer;" value="Register">
+            <a href="{% url 'login' %}">
+              <input type="button" style="background-color: #d9534f;border-color: #d43f3a;cursor: pointer;" value="Cancel"/>
+            </a>
+          </td>
+        </tr>
+
+      </table>
+    </form>    
+  </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Data Table</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1>Requests</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Purpose</th>
+<!--				<th>Materials</th>-->
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in user_orders %}
+			<tr>
+				<td>{{ row.course }}</td>
+				<td>{{ row.purpose }}</td>
+			</tr>
+<!--				{% for m in materials %}-->
+<!--			<tr>-->
+<!--				<td>{{ m.material }}</td>-->
+<!--			</tr>-->
+<!--				{% endfor %}-->
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{% url 'index' %}">
+		<input type="button" style="background-color: #24a0ed; border-color: #24a0ed;cursor: pointer;" value="Back to Home"/>
+	</a>
+</body>
+</html>

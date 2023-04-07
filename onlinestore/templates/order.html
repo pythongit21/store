@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div style="text-align:center; margin-top:30px; margin-bottom: 100px;">
+
+		<!-- Order Form -->
+		<form name="orderForm" method="POST">
+		{% csrf_token %}
+		
+		<table align="center" style="text-align:left;border:none;width:80%;">
+			<tr style="height:60px;">
+          		<td colspan="2">&nbsp;&nbsp;
+					{% for m in messages %}
+            			<h3 style="color: #008000">{{ m }}</h3>
+            		{% endfor %}
+          		</td>
+        	</tr>
+			<tr style="height:60px;">
+				<td style="width:25%;">Name</td>
+				<td><input type="text" id="student" name="student" placeholder="Name" required></td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Date of Birth</td>
+				<td><input type="date" id="dob" name="dob" placeholder="Date of Birth" required></td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Age</td>
+				<td><input type="number" id="age" name="age" placeholder="Age" required></td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Gender</td>
+				<td>
+					<input type="radio" name="gender" id="male" value="male">&nbsp;<label for="male">Male</label>
+					<input type="radio" name="gender" id="female" value="female">&nbsp;<label for="female">Female</label>
+					<input type="radio" name="gender" id="other" value="other">&nbsp;<label for="other">Other</label>
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Mobile</td>
+				<td><input type="text" id="mobile" name="mobile" placeholder="Mobile" required></td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Email</td>
+				<td><input type="email" id="email" name="email" placeholder="email" required></td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Address</td>
+				<td>
+				<!--<input type="text" id="address" name="address" placeholder="Address" required>-->
+					<textarea id="address" name="address" required></textarea>
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Department</td>
+				<td>
+					<!-- Department dropdown -->
+					<select id="department-dropdown" name="department">
+						<option value="">Select a department</option>
+						{% for department in departments %}
+						<option value="{{ department.id }}">{{ department.name }}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Course</td>
+				<td>
+					<!-- Course dropdown -->
+					<select id="course-dropdown" name="course" disabled>
+						<option value="">Please select a department first</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Purpose</td>
+				<td>
+					<select id="purpose-dropdown" name="purpose">
+						<option value="">Select a Purpose</option>
+						{% for purpose in purpose %}
+						<option value="{{ purpose.id }}">{{ purpose.name }}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td>Material</td>
+				<td>
+					{% for materials in material %}
+					<input type="checkbox" id="{{ materials.id }}" name="material" value="{{ materials.id }}">&nbsp;<label for="{{ materials.id }}">{{ materials.name }}</label>
+					<br>
+					{% endfor %}
+				</td>
+			</tr>
+			
+			<tr style="height:60px;">
+				<td colspan="2">
+					<input type="submit" style="color: #fff;background-color: #5cb85c;border-color: #4cae4c;cursor: pointer;" value="Confirm">
+					{% if user.is_authenticated %}
+						<a href="{% url 'logout' %}">
+							<input type="button" style="background-color: #d9534f;border-color: #d43f3a;cursor: pointer;" value="Logout"/>
+						</a>
+					{% else %}
+						<a href="{% url 'index' %}">
+						  <input type="button" style="background-color: #d9534f;border-color: #d43f3a;cursor: pointer;" value="Cancel"/>
+						</a>
+					{% endif %}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a href="{% url 'index' %}">
+						  <input type="button" style="background-color: #24a0ed; border-color: #24a0ed;cursor: pointer;" value="Back to Home"/>
+					</a>
+				</td>
+			</tr>
+
+		</table>
+		</form>
+	</div>
+{% endblock %}
